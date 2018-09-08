@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+
+android {
+
+    compileSdkVersion 27
+
+    defaultConfig {
+        applicationId "com.letty7.dingdang"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : JPUSH_APPKEY,
+                JPUSH_CHANNEL: "developer-default",
+        ]
+
+    }
+
+    signingConfigs {
+
+        prod {
+            keyAlias ALIAS
+            keyPassword KEY_PASSWORD
+            storeFile rootProject.file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            v2SigningEnabled true
+        }
+
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.prod
+        }
+
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.outputs.all { output ->
+                def buildName = "DingDang"
+                def type = variant.buildType.name
+                def releaseApkName = buildName + '_' + type + "_" + versionName + '_' + new Date().format("yyyy-MM-dd_HH-mm-ss") + '.apk'
+                outputFileName = releaseApkName
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:design:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:3.1.3'
+    implementation 'cn.jiguang.sdk:jcore:1.2.1'
+
+    //权限处理
+    implementation('com.github.hotchemi:permissionsdispatcher:3.2.0') {
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }
+    kapt "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
+    //bugly
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.3.1'
+    implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
+}

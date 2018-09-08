@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title="@string/app_name">
+
+    <PreferenceCategory
+        android:key="category_push"
+        android:title="@string/category_push_title">
+
+        <SwitchPreference
+            android:key="push_switch"
+            android:summaryOff="@string/c_state_stopped"
+            android:summaryOn="@string/c_state_started"
+            android:title="@string/check_state_title"
+            tools:summary="@string/c_state_started"/>
+
+        <ListPreference
+            android:defaultValue="@string/time_list_default_values"
+            android:dialogTitle="@string/time_list_dialog_title"
+            android:entries="@array/time_list_entries"
+            android:entryValues="@array/time_list_entry_values"
+            android:key="push_time_list"
+            android:title="@string/time_list_title"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_phone"
+        android:title="@string/category_phone_title">
+
+        <SwitchPreference
+            android:key="phone_switch"
+            android:summaryOff="@string/c_state_stopped"
+            android:summaryOn="@string/c_state_started"
+            android:title="@string/phone_switch_title"
+            tools:summary="@string/c_state_started"/>
+
+        <ListPreference
+            android:defaultValue="@string/phone_list_default_values"
+            android:dialogTitle="@string/phone_list_dialog_title"
+            android:entries="@array/phone_list_entries"
+            android:entryValues="@array/phone_list_entry_values"
+            android:key="phone_response_list"
+            android:title="@string/phone_list_title"/>
+
+        <EditTextPreference
+            android:inputType="number"
+            android:key="phone_number"
+            android:title="@string/phone_number_title"
+            tools:summary="@string/c_not_set"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="about"
+        android:title="@string/category_about_title">
+
+        <Preference
+            android:key="about_dingdang"
+            android:summary="@string/about_summary"
+            android:title="@string/about_title"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">钉铛猫</string>
+
+    <string name="action_update">检查更新</string>
+    <string name="action_exit">退出</string>
+
+    <string name="c_state_stopped">已关闭</string>
+    <string name="c_state_started">已开启</string>
+    <string name="c_not_set">未设置</string>
+
+    <string name="push_init_succeed">推送服务注册成功</string>
+
+    <string name="sync">同步中…</string>
+    <string name="sync_succeed">同步成功</string>
+    <string name="sync_failure">同步失败</string>
+    <string name="sync_failure_network">网络原因导致同步失败，请检查网络后重新点击选项。</string>
+    <string name="push_close_tips">当前已关闭接收推送功能，请将其打开后重新点击选项。</string>
+
+    <string name="category_push_title">推送唤醒方式</string>
+    <string name="check_state_title">接收推送消息</string>
+
+    <string name="time_list_title">推送时间段</string>
+    <string name="time_list_dialog_title">选择时间段</string>
+
+    <string name="phone_switch_title">功能开关</string>
+
+    <string name="time_list_default_values">1</string>
+
+    <string-array name="time_list_entries">
+        <item>7:30 – 7:50</item>
+        <item>8:30 – 8:50</item>
+        <item>9:00 – 9:20</item>
+    </string-array>
+
+    <string-array name="time_list_entry_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="category_phone_title">拨打电话方式</string>
+
+    <string name="phone_number_title">响应号码</string>
+    <string name="phone_list_default_values">0</string>
+    <string name="phone_list_title">响应方式</string>
+    <string name="phone_list_dialog_title">选择响应方式</string>
+
+    <string-array name="phone_list_entries">
+        <item>静态响应</item>
+        <item>动态响应</item>
+    </string-array>
+
+    <string-array name="phone_list_entry_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="category_about_title">关于</string>
+    <string name="about_title">钉铛猫</string>
+    <string name="about_summary">程序员绝不允许迟到。</string>
+
+</resources>
