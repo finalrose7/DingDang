@@ -9,16 +9,13 @@ class App : Application() {
 
     companion object {
         var sContext: App by Delegates.notNull()
-
-        const val buglyId = "6595a818f4"
-
     }
 
     override fun onCreate() {
         super.onCreate()
         sContext = this
 
-        Bugly.init(this, buglyId, BuildConfig.DEBUG)
+        Bugly.init(this, BuildConfig.BUGLY_ID, BuildConfig.DEBUG)
 
         JPushInterface.setDebugMode(BuildConfig.DEBUG)
         JPushInterface.init(this)

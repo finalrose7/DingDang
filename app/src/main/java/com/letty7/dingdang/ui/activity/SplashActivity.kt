@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import com.letty7.dingdang.R
 import permissions.dispatcher.*
+
 
 @RuntimePermissions
 class SplashActivity : AppCompatActivity() {
@@ -40,12 +42,12 @@ class SplashActivity : AppCompatActivity() {
     fun showRationale(request: PermissionRequest?) {
         AlertDialog.Builder(this)
                 .setCancelable(false)
-                .setTitle("提示")
-                .setMessage("读取手机状态信息等权限仅用来统计分析，不会获取用户隐私，请放心授予权限！")
-                .setNegativeButton("取消") { _, _ ->
+                .setTitle(R.string.c_tips)
+                .setMessage(R.string.permission_rationale)
+                .setNegativeButton(R.string.c_cancel) { _, _ ->
                     request?.cancel()
                 }
-                .setPositiveButton("确定") { _, _ ->
+                .setPositiveButton(R.string.c_sure) { _, _ ->
                     request?.proceed()
                 }
                 .create()
@@ -59,9 +61,9 @@ class SplashActivity : AppCompatActivity() {
     fun onDenied() {
         AlertDialog.Builder(this)
                 .setCancelable(false)
-                .setTitle("提示")
-                .setMessage("缺少正常运行所需权限，请退出后重新打开并授予权限。")
-                .setPositiveButton("确定") { _, _ -> finish() }
+                .setTitle(R.string.c_tips)
+                .setMessage(R.string.permission_denied)
+                .setPositiveButton(R.string.c_sure) { _, _ -> finish() }
                 .create()
                 .show()
     }
@@ -73,10 +75,10 @@ class SplashActivity : AppCompatActivity() {
     fun onNeverAskAgain() {
         AlertDialog.Builder(this)
                 .setCancelable(false)
-                .setTitle("提示")
-                .setMessage("缺少正常运行所需权限，请前往设置授予权限。")
-                .setNegativeButton("取消") { _, _ -> finish() }
-                .setPositiveButton("确定") { _, _ ->
+                .setTitle(R.string.c_tips)
+                .setMessage(R.string.permission_ask_again)
+                .setNegativeButton(R.string.c_cancel) { _, _ -> finish() }
+                .setPositiveButton(R.string.c_sure) { _, _ ->
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     intent.data = Uri.parse("package:$packageName")
                     startActivity(intent)

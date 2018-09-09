@@ -4,9 +4,16 @@
     <string name="action_update">检查更新</string>
     <string name="action_exit">退出</string>
 
+    <string name="c_tips">提示</string>
+    <string name="c_sure">确定</string>
+    <string name="c_cancel">取消</string>
     <string name="c_state_stopped">已关闭</string>
     <string name="c_state_started">已开启</string>
     <string name="c_not_set">未设置</string>
+
+    <string name="permission_rationale">以上权限仅因为功能所需，不会获取用户隐私，请放心授予权限。</string>
+    <string name="permission_denied">缺少正常运行所需权限，请退出后重新打开并授予权限。</string>
+    <string name="permission_ask_again">缺少正常运行所需权限，请前往设置授予权限。</string>
 
     <string name="push_init_succeed">推送服务注册成功</string>
 
