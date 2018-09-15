@@ -65,5 +65,10 @@
     <string name="category_about_title">关于</string>
     <string name="about_title">钉铛猫</string>
     <string name="about_summary">程序员绝不允许迟到。</string>
+    <string name="category_sms_title">短信唤醒方式</string>
+
+    <string name="sms_state_title">服务运行状态</string>
+    <string name="sms_state_running">正在运行</string>
+    <string name="sms_state_stop">停止运行</string>
 
 </resources>

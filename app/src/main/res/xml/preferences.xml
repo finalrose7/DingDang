@@ -53,6 +53,29 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="sms"
+        android:title="@string/category_sms_title">
+
+        <SwitchPreference
+            android:key="sms_switch"
+            android:summaryOff="@string/c_state_stopped"
+            android:summaryOn="@string/c_state_started"
+            android:title="@string/phone_switch_title"
+            tools:summary="@string/c_state_started"/>
+
+        <Preference
+            android:key="sms_state"
+            android:title="@string/sms_state_title"/>
+
+        <EditTextPreference
+            android:inputType="number"
+            android:key="sms_number"
+            android:title="@string/phone_number_title"
+            tools:summary="@string/c_not_set"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="about"
         android:title="@string/category_about_title">
 

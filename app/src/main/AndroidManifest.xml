@@ -3,12 +3,10 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.letty7.dingdang">
 
-    <!-- Required -->
     <permission
         android:name="com.letty7.dingdang.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"/>
 
-    <!-- Required  一些系统要求的权限，如访问网络等-->
     <uses-permission android:name="com.letty7.dingdang.permission.JPUSH_MESSAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -33,7 +31,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
 
-    <!-- Android 8.0 打开APK文件需要的权限 -->
+    <!-- Android 8.0 + -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <application
@@ -184,7 +182,7 @@
             android:name="JPUSH_APPKEY"
             android:value="${JPUSH_APPKEY}"/>
 
-        <!--适配Android 7.0 + -->
+        <!--Android 7.0 + -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.letty7.dingdang.fileprovider"
@@ -194,6 +192,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
+
+        <service
+            android:name=".service.SmsNotificationListenerService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
 
     </application>
 

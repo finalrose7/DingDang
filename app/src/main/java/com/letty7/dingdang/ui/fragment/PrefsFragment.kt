@@ -1,17 +1,24 @@
 package com.letty7.dingdang.ui.fragment
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.preference.*
+import android.provider.Settings
+import android.support.v4.app.NotificationManagerCompat
 import android.text.TextUtils
 import cn.jpush.android.api.JPushInterface
 import com.letty7.dingdang.App
 import com.letty7.dingdang.R
 import com.letty7.dingdang.UserPreferences
+import com.letty7.dingdang.service.SmsNotificationListenerService
 import com.letty7.dingdang.ui.activity.MainActivity
+
 
 class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -20,6 +27,9 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
 
     private lateinit var phoneResponseList: ListPreference
     private lateinit var phoneNumber: EditTextPreference
+
+    private lateinit var smsState: Preference
+    private lateinit var smsNumber: EditTextPreference
 
     private lateinit var aboutDingDang: Preference
 
@@ -41,6 +51,10 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
         const val KEY_PHONE_SWITCH = "phone_switch"
         const val KEY_PHONE_RESPONSE_LIST = "phone_response_list"
         const val KEY_PHONE_NUMBER = "phone_number"
+
+        const val KEY_SMS_SWITCH = "sms_switch"
+        const val KEY_SMS_STATE = "sms_state"
+        const val KEY_SMS_NUMBER = "sms_number"
 
         const val KEY_ABOUT_DING_DANG = "about_dingdang"
 
@@ -74,6 +88,9 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
         phoneResponseList = findPreference(KEY_PHONE_RESPONSE_LIST) as ListPreference
         phoneNumber = findPreference(KEY_PHONE_NUMBER) as EditTextPreference
 
+        smsState = findPreference(KEY_SMS_STATE)
+        smsNumber = findPreference(KEY_SMS_NUMBER) as EditTextPreference
+
         aboutDingDang = findPreference(KEY_ABOUT_DING_DANG)
 
         initState()
@@ -106,6 +123,13 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
                 else
                     phoneNumberValues
 
+        val smsNumberValues = spf.getString(KEY_SMS_NUMBER, "")
+        smsNumber.summary =
+                if (TextUtils.isEmpty(smsNumberValues))
+                    getString(R.string.c_not_set)
+                else
+                    smsNumberValues
+
         val packageInfo = getPackageInfo(activity)
         packageInfo?.apply {
             aboutDingDang.title = getString(R.string.app_name) + " " + versionName
@@ -115,6 +139,12 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
 
     override fun onResume() {
         super.onResume()
+
+        smsState.summary = if (isNotificationListenerServiceEnabled(App.sContext))
+            getString(R.string.sms_state_running)
+        else
+            getString(R.string.sms_state_stop)
+
         preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
@@ -130,6 +160,17 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
         when (preference?.key) {
             KEY_ABOUT_DING_DANG -> {
                 mainActivity?.showSnackbar("还没想好怎么写，喵~")
+            }
+
+            KEY_SMS_STATE -> {
+
+                val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1)
+                    Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+                else
+                    Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+
+                startActivity(intent)
+                toggleNotificationListenerService(App.sContext)
             }
         }
 
@@ -179,7 +220,29 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
                             values
             }
 
+            KEY_SMS_NUMBER -> {
+                val values = sharedPreferences.getString(KEY_SMS_NUMBER, "")
+                smsNumber.summary =
+                        if (TextUtils.isEmpty(values))
+                            getString(R.string.c_not_set)
+                        else
+                            values
+            }
+
         }
+    }
+
+    private fun toggleNotificationListenerService(context: Context) {
+        val pm = context.packageManager
+        pm.setComponentEnabledSetting(ComponentName(context, SmsNotificationListenerService::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
+        pm.setComponentEnabledSetting(ComponentName(context, SmsNotificationListenerService::class.java),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
+    }
+
+    private fun isNotificationListenerServiceEnabled(context: Context): Boolean {
+        val packageNames = NotificationManagerCompat.getEnabledListenerPackages(context)
+        return packageNames.contains(context.packageName)
     }
 
     private fun getPackageInfo(context: Context): PackageInfo? {
