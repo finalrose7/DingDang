@@ -170,9 +170,7 @@ class MainActivity : AppCompatActivity() {
         val km: KeyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
         val keyguardLock = km.newKeyguardLock("unLock")
 
-        // 屏幕锁定
         keyguardLock.reenableKeyguard()
-        // 解锁
         keyguardLock.disableKeyguard()
     }
 

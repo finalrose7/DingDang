@@ -23,7 +23,7 @@
     <string name="sync_failure_network">网络原因导致同步失败，请检查网络后重新点击选项。</string>
     <string name="push_close_tips">当前已关闭接收推送功能，请将其打开后重新点击选项。</string>
 
-    <string name="category_push_title">推送唤醒方式</string>
+    <string name="category_push_title">推送唤醒</string>
     <string name="check_state_title">接收推送消息</string>
 
     <string name="time_list_title">打卡时间段</string>
@@ -45,7 +45,7 @@
         <item>2</item>
     </string-array>
 
-    <string name="category_phone_title">拨打电话方式</string>
+    <string name="category_phone_title">来电唤醒</string>
 
     <string name="phone_number_title">响应号码</string>
     <string name="phone_list_default_values">0</string>
@@ -65,7 +65,7 @@
     <string name="category_about_title">关于</string>
     <string name="about_title">钉铛猫</string>
     <string name="about_summary">程序员绝不允许迟到。</string>
-    <string name="category_sms_title">短信唤醒方式</string>
+    <string name="category_sms_title">短信唤醒</string>
 
     <string name="sms_state_title">通知使用权限</string>
     <string name="sms_state_running">已开启</string>
@@ -76,5 +76,6 @@
     <string name="notify_channel_name">钉铛猫后台服务</string>
     <string name="notify_channel_description">钉铛猫后台服务</string>
 
+    <string name="about_label">钉铛猫</string>
 
 </resources>

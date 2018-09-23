@@ -17,6 +17,7 @@ import com.letty7.dingdang.App
 import com.letty7.dingdang.R
 import com.letty7.dingdang.UserPreferences
 import com.letty7.dingdang.service.SmsNotificationListenerService
+import com.letty7.dingdang.ui.activity.AboutActivity
 import com.letty7.dingdang.ui.activity.MainActivity
 
 
@@ -159,7 +160,7 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
 
         when (preference?.key) {
             KEY_ABOUT_DING_DANG -> {
-                mainActivity?.showSnackbar("还没想好怎么写，喵~")
+                startActivity(Intent(activity, AboutActivity::class.java))
             }
 
             KEY_SMS_STATE -> {
