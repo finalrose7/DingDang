@@ -70,6 +70,7 @@
     <string name="sms_state_title">通知使用权限</string>
     <string name="sms_state_running">已开启</string>
     <string name="sms_state_stop">已关闭</string>
+    <string name="sms_response_content">响应短信内容</string>
 
     <string name="notify_title">钉铛猫</string>
     <string name="notify_content">通知栏监听后台运行中…</string>

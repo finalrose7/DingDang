@@ -160,7 +160,8 @@ class PrefsFragment : PreferenceFragment(), SharedPreferences.OnSharedPreference
 
         when (preference?.key) {
             KEY_ABOUT_DING_DANG -> {
-                startActivity(Intent(activity, AboutActivity::class.java))
+//                startActivity(Intent(activity, AboutActivity::class.java))
+                mainActivity?.showSnackbar("待完成，喵～")
             }
 
             KEY_SMS_STATE -> {

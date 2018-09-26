@@ -70,7 +70,7 @@
         <EditTextPreference
             android:inputType="number"
             android:key="sms_number"
-            android:title="@string/phone_number_title"
+            android:title="@string/sms_response_content"
             tools:summary="@string/c_not_set"/>
 
     </PreferenceCategory>
